@@ -10,6 +10,7 @@ interface UserChart {
   data: ChartData;
   width: number;
   height: number;
+  colorScheme: string[];
 }
 
 @Component({
@@ -22,6 +23,7 @@ interface UserChart {
 export class ChartCreateComponent {
   chartName = '';
   chartType: ChartType | '' = '';
+  selectedScheme: string[] = [];
   submitted = false;
   isEditingIndex: number | null = null;
 
@@ -31,21 +33,33 @@ export class ChartCreateComponent {
     { value: 'pie', label: 'Pie Chart' },
   ];
 
+  colorSchemes: { name: string; colors: string[] }[] = [
+    { name: 'Vibrant', colors: ['#f1547d', '#6b478d', '#f7b733', '#4ABDAC'] },
+    { name: 'Cool Blue', colors: ['#1E88E5', '#42A5F5', '#90CAF9', '#BBDEFB'] },
+    { name: 'Dark Mode', colors: ['#212121', '#424242', '#616161', '#757575'] },
+    { name: 'Nature', colors: ['#4CAF50', '#8BC34A', '#CDDC39', '#FFC107'] },
+    { name: 'Pastel', colors: ['#ffd1dc', '#d1c4e9', '#b2ebf2', '#c8e6c9'] },
+  ];
+
   charts: UserChart[] = [];
 
   chartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    animation: {
+      duration: 1200,
+      easing: 'easeOutQuart',
+    },
   };
 
-  getSampleData(type: ChartType): ChartData {
+  getSampleData(type: ChartType, colors: string[]): ChartData {
     if (type === 'pie') {
       return {
-        labels: ['Red', 'Blue', 'Yellow'],
+        labels: ['Red', 'Green', 'Blue', 'Yellow'],
         datasets: [
           {
-            data: [30, 50, 20],
-            backgroundColor: this.getRandomColors(3),
+            data: [30, 30, 20, 20],
+            backgroundColor: colors,
           },
         ],
       };
@@ -69,28 +83,23 @@ export class ChartCreateComponent {
         {
           label: 'Data',
           data: [10, 20, 40, 60, 75, 62, 79, 81, 32, 45, 69, 46],
-          backgroundColor: this.getRandomColors(1),
-          borderColor: '#1E88E5',
+          backgroundColor: type === 'bar' ? colors : undefined,
+          // borderColor: type !== 'pie' ? '#1E88E5' : undefined,
           fill: type === 'bar',
         },
       ],
     };
   }
 
-  getRandomColors(count: number): string[] {
-    const colors: string[] = [];
-    for (let i = 0; i < count; i++) {
-      const color = '#' + Math.floor(Math.random() * 16777215).toString(16);
-      colors.push(color);
-    }
-    return colors;
-  }
-
   onSubmit() {
     this.submitted = true;
-    if (!this.chartName || !this.chartType) return;
+    if (!this.chartName || !this.chartType || this.selectedScheme.length === 0)
+      return;
 
-    const chartData = this.getSampleData(this.chartType as ChartType);
+    const chartData = this.getSampleData(
+      this.chartType as ChartType,
+      this.selectedScheme
+    );
 
     if (this.isEditingIndex !== null) {
       this.charts[this.isEditingIndex] = {
@@ -99,6 +108,7 @@ export class ChartCreateComponent {
         data: chartData,
         width: 400,
         height: 300,
+        colorScheme: this.selectedScheme,
       };
       this.isEditingIndex = null;
     } else {
@@ -108,6 +118,7 @@ export class ChartCreateComponent {
         data: chartData,
         width: 400,
         height: 300,
+        colorScheme: this.selectedScheme,
       });
     }
 
@@ -118,6 +129,7 @@ export class ChartCreateComponent {
     const chart = this.charts[index];
     this.chartName = chart.name;
     this.chartType = chart.type;
+    this.selectedScheme = chart.colorScheme;
     this.isEditingIndex = index;
   }
 
@@ -135,6 +147,7 @@ export class ChartCreateComponent {
   resetForm() {
     this.chartName = '';
     this.chartType = '';
+    this.selectedScheme = [];
     this.submitted = false;
   }
 }

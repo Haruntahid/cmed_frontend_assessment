@@ -3,10 +3,11 @@
   <div>
     <label>Chart Name:</label>
     <input type="text" [(ngModel)]="chartName" name="chartName" required />
-    <span *ngIf="submitted && !chartName" class="error-text"
-      >Chart name is required.</span
-    >
+    <span *ngIf="submitted && !chartName" class="error-text">
+      Chart name is required.
+    </span>
   </div>
+
   <div>
     <label>Chart Type:</label>
     <select [(ngModel)]="chartType" name="chartType" required>
@@ -15,10 +16,24 @@
         {{ type.label }}
       </option>
     </select>
-    <span *ngIf="submitted && !chartType" class="error-text"
-      >Chart type is required.</span
-    >
+    <span *ngIf="submitted && !chartType" class="error-text">
+      Chart type is required.
+    </span>
   </div>
+
+  <div>
+    <label>Color Scheme:</label>
+    <select [(ngModel)]="selectedScheme" name="colorScheme" required>
+      <option value="" disabled>Select scheme</option>
+      <option *ngFor="let scheme of colorSchemes" [ngValue]="scheme.colors">
+        {{ scheme.name }}
+      </option>
+    </select>
+    <span *ngIf="submitted && selectedScheme.length === 0" class="error-text">
+      Color scheme is required.
+    </span>
+  </div>
+
   <button type="submit">
     {{ isEditingIndex !== null ? "Update Chart" : "Create Chart" }}
   </button>
@@ -36,10 +51,11 @@
       <button (click)="resizeChart(i, false)">-</button>
     </div>
   </div>
+
   <div
     [style.width.px]="chart.width"
     [style.height.px]="chart.height"
-    style="position: relative"
+    class="chart-container"
   >
     <canvas
       baseChart
