@@ -84,7 +84,6 @@ export class ChartCreateComponent {
           label: 'Data',
           data: [10, 20, 40, 60, 75, 62, 79, 81, 32, 45, 69, 46],
           backgroundColor: type === 'bar' ? colors : undefined,
-          // borderColor: type !== 'pie' ? '#1E88E5' : undefined,
           fill: type === 'bar',
         },
       ],
@@ -93,8 +92,15 @@ export class ChartCreateComponent {
 
   onSubmit() {
     this.submitted = true;
-    if (!this.chartName || !this.chartType || this.selectedScheme.length === 0)
-      return;
+
+    if (
+      !this.chartName ||
+      !this.chartType ||
+      !this.selectedScheme ||
+      this.selectedScheme.length === 0
+    ) {
+      return; // stop if invalid inputs
+    }
 
     const chartData = this.getSampleData(
       this.chartType as ChartType,
@@ -140,8 +146,8 @@ export class ChartCreateComponent {
   resizeChart(index: number, increase: boolean) {
     const chart = this.charts[index];
     const change = increase ? 50 : -50;
-    chart.width += change;
-    chart.height += change;
+    chart.width = Math.max(200, chart.width + change);
+    chart.height = Math.max(150, chart.height + change);
   }
 
   resetForm() {
@@ -149,5 +155,9 @@ export class ChartCreateComponent {
     this.chartType = '';
     this.selectedScheme = [];
     this.submitted = false;
+  }
+
+  goBack() {
+    window.history.back(); // simple back navigation for back button
   }
 }

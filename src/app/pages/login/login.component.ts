@@ -26,7 +26,7 @@ export class LoginComponent {
 
     this.auth.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
-        alert('Login successful! ✅');
+        alert('Login successful!');
         this.router.navigate(['/dashboard']);
       },
       error: () => {

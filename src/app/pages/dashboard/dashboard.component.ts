@@ -12,6 +12,8 @@ import { RouterModule, Router } from '@angular/router';
 export class DashboardComponent {
   constructor(private router: Router) {}
 
+  lastLogin = new Date();
+
   logout() {
     localStorage.removeItem('user');
     this.router.navigate(['/login']);

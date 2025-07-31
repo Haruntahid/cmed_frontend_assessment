@@ -1,3 +1,40 @@
-<h2>Welcome to Dashboard!</h2>
-<button routerLink="/create-chart">Create Chart</button>
-<button (click)="logout()">Logout</button>
+<div class="dashboard-container">
+  <h2 class="dashboard-title">Welcome to Dashboard!</h2>
+
+  <div class="button-group">
+    <button routerLink="/create-chart" class="btn btn-primary">
+      Create Chart
+    </button>
+    <button (click)="logout()" class="btn btn-danger">Logout</button>
+  </div>
+
+  <section class="dashboard-overview">
+    <h3 class="overview-title">Dashboard Overview</h3>
+
+    <p class="overview-text">
+      Here you can manage your charts, monitor your data, and customize your
+      preferences. Use the "Create Chart" button to start visualizing your data
+      instantly. Stay logged in and easily access your personalized dashboard
+      features.
+    </p>
+
+    <div class="stats-grid">
+      <div class="stat-box stat-blue">
+        <h4>Charts Created</h4>
+        <p class="stat-number">12</p>
+      </div>
+
+      <div class="stat-box stat-green">
+        <h4>Active Users</h4>
+        <p class="stat-number">85</p>
+      </div>
+
+      <div class="stat-box stat-yellow">
+        <h4>Pending Tasks</h4>
+        <p class="stat-number">3</p>
+      </div>
+    </div>
+
+    <div class="last-login">Last login: {{ lastLogin | date : "medium" }}</div>
+  </section>
+</div>
