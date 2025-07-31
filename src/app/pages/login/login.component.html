@@ -1,0 +1,46 @@
+<div class="login-container">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="login-form">
+    <h2 class="form-title">Login</h2>
+
+    <div class="input-group">
+      <i class="fa fa-envelope icon"></i>
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        placeholder="Enter your email"
+        required
+        email
+        #emailField="ngModel"
+      />
+    </div>
+    <div *ngIf="emailField.invalid && emailField.touched" class="error-msg">
+      Valid email is required
+    </div>
+
+    <div class="input-group">
+      <i class="fa fa-lock icon"></i>
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        placeholder="Enter your password"
+        required
+        minlength="3"
+        #passwordField="ngModel"
+      />
+    </div>
+    <div
+      *ngIf="passwordField.invalid && passwordField.touched"
+      class="error-msg"
+    >
+      Password must be at least 3 characters
+    </div>
+
+    <button type="submit" [disabled]="form.invalid" class="login-button">
+      Login
+    </button>
+
+    <div *ngIf="error" class="error-msg">{{ error }}</div>
+  </form>
+</div>
