@@ -158,6 +158,6 @@ export class ChartCreateComponent {
   }
 
   goBack() {
-    window.history.back(); // simple back navigation for back button
+    window.history.back();
   }
 }

@@ -1,12 +1,45 @@
 .main {
   padding: 0 10px;
 }
+
+/* Title area */
+.title-bar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.title-bar h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: #374151;
+}
+
+.back-btn {
+  position: absolute;
+  left: 0;
+  padding: 6px 14px;
+  font-size: 1rem;
+  border: none;
+  background-color: #f3f4f6;
+  color: #374151;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #e5e7eb;
+}
+
 .form-box {
   padding: 1.5rem;
   border: 1px solid #ccc;
   border-radius: 12px;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-  background: white;
+  /* background: white; */
   width: auto;
   margin-bottom: 2rem;
   display: flex;
@@ -19,33 +52,31 @@
   display: block;
   margin-top: 10px;
   font-weight: bold;
+  color: #374151;
 }
 
 .form-box input,
 .form-box select {
   width: 100%;
-  padding: 8px;
+  padding: 10px 14px;
   margin-top: 4px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid #ccc;
+  background-color: #f9fafb;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-box input:focus,
+.form-box select:focus {
+  border-color: #e2436e;
+  outline: none;
+  background-color: white;
+  box-shadow: 0 6px 12px rgba(226, 67, 110, 0.3);
 }
 
 .form-box input {
-  width: 98%;
-}
-
-.form-box button {
-  background-color: #f1547d;
-  color: white;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  margin-top: 1rem;
-  cursor: pointer;
-}
-
-.form-box button:hover {
-  background-color: #e2436e;
+  width: 100%;
 }
 
 .chart-box {
@@ -68,6 +99,7 @@
 
 .chart-container {
   margin-top: 10px;
+  position: relative;
 }
 
 .chart-header {
@@ -94,10 +126,6 @@
 .error-text {
   color: red;
   font-size: 0.9em;
-}
-
-.chart-container {
-  position: relative;
 }
 
 /* Chrome, Edge, Safari */
