@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgChartsModule } from 'ng2-charts';
 import { ChartType, ChartData, ChartOptions } from 'chart.js';
+import { ToastrService } from 'ngx-toastr';
 
 interface UserChart {
   name: string;
@@ -27,7 +28,9 @@ export class ChartCreateComponent {
   submitted = false;
   isEditingIndex: number | null = null;
 
-  isModalOpen = false; // <-- modal visibility state
+  isModalOpen = false;
+
+  constructor(private toastr: ToastrService) {}
 
   chartTypes = [
     { value: 'bar', label: 'Bar Chart' },
@@ -101,7 +104,8 @@ export class ChartCreateComponent {
       !this.selectedScheme ||
       this.selectedScheme.length === 0
     ) {
-      return; // stop if invalid inputs
+      this.toastr.error('Please fill out all required fields.', 'Form Error');
+      return;
     }
 
     const chartData = this.getSampleData(
@@ -118,6 +122,7 @@ export class ChartCreateComponent {
         height: 300,
         colorScheme: this.selectedScheme,
       };
+      this.toastr.success('Chart updated successfully!', 'Updated');
       this.isEditingIndex = null;
     } else {
       this.charts.push({
@@ -128,10 +133,11 @@ export class ChartCreateComponent {
         height: 300,
         colorScheme: this.selectedScheme,
       });
+      this.toastr.success('Chart created successfully!', 'Created');
     }
 
     this.resetForm();
-    this.isModalOpen = false; // close modal on submit
+    this.isModalOpen = false;
   }
 
   openEditModal(index: number) {
@@ -152,6 +158,7 @@ export class ChartCreateComponent {
 
   deleteChart(index: number) {
     this.charts.splice(index, 1);
+    this.toastr.info('Chart deleted.', 'Deleted');
   }
 
   resizeChart(index: number, increase: boolean) {
