@@ -1,59 +1,60 @@
-# CmedFrontendAssessment
+# 📊 Cmed-Frontend-Assessment
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+An Angular application that allows users to create dynamic charts using `ng2-charts` and `Chart.js`.
 
-## Development server
+---
 
-To start a local development server, run:
+## ✅ Features
+
+- 📱 Responsive chart creation
+- ⚙️ Customizable chart type and data
+- 🎞 Smooth chart animations
+- ♻️ Reusable form components
+- ✏️ Edit and 🗑 Delete chart functionality
+
+---
+
+## 📦 Core Dependencies
+
+- `@angular/core` ^19.2.0
+- `chart.js` ^4.5.0
+- `ng2-charts` ^4.1.1
+
+---
+
+## 🛠 Getting Started
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Haruntahid/cmed_frontend_assessment.git
+cd cmed-frontend-assessment
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Run the Application
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Then open your browser and go to:
 
-## Code scaffolding
+🔗 http://localhost:4200
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 🔐 Credentials
 
 ```bash
-ng generate --help
+👤 Username: cmed@cmed.com
+🔒 Password: cmed
 ```
 
-## Building
+### 🌐 Live Site
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+View the deployed application:
+🔗 https://your-live-site-url.com
