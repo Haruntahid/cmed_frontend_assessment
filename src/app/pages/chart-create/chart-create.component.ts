@@ -27,6 +27,8 @@ export class ChartCreateComponent {
   submitted = false;
   isEditingIndex: number | null = null;
 
+  isModalOpen = false; // <-- modal visibility state
+
   chartTypes = [
     { value: 'bar', label: 'Bar Chart' },
     { value: 'line', label: 'Line Chart' },
@@ -129,14 +131,23 @@ export class ChartCreateComponent {
     }
 
     this.resetForm();
+    this.isModalOpen = false; // close modal on submit
   }
 
-  editChart(index: number) {
+  openEditModal(index: number) {
     const chart = this.charts[index];
     this.chartName = chart.name;
     this.chartType = chart.type;
     this.selectedScheme = chart.colorScheme;
     this.isEditingIndex = index;
+    this.submitted = false;
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.resetForm();
+    this.isEditingIndex = null;
   }
 
   deleteChart(index: number) {

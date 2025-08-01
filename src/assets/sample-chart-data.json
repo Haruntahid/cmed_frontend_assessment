@@ -1,0 +1,40 @@
+{
+  "bar": {
+    "labels": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "June",
+      "July",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "data": [10, 20, 40, 60, 75, 62, 79, 81, 32, 45, 69, 46]
+  },
+  "line": {
+    "labels": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "June",
+      "July",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "data": [5, 15, 30, 45, 65, 55, 70, 60, 40, 50, 72, 38]
+  },
+  "pie": {
+    "labels": ["Red", "Green", "Blue", "Yellow"],
+    "data": [30, 30, 20, 20]
+  }
+}

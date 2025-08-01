@@ -3,8 +3,10 @@
     <button class="back-btn" (click)="goBack()">← Back</button>
     <h2 class="title">Create a Chart</h2>
   </div>
-  <form (ngSubmit)="onSubmit()" class="form-box">
-    <div>
+
+  <!-- Main form for adding new chart -->
+  <form (ngSubmit)="onSubmit()" class="form-box" *ngIf="!isModalOpen">
+    <div class="form-group">
       <label>Chart Name:</label>
       <input type="text" [(ngModel)]="chartName" name="chartName" required />
       <span *ngIf="submitted && !chartName" class="error-text">
@@ -12,7 +14,7 @@
       </span>
     </div>
 
-    <div>
+    <div class="form-group">
       <label>Chart Type:</label>
       <select [(ngModel)]="chartType" name="chartType" required>
         <option value="" disabled>Select type</option>
@@ -25,7 +27,7 @@
       </span>
     </div>
 
-    <div>
+    <div class="form-group">
       <label>Color Scheme:</label>
       <select [(ngModel)]="selectedScheme" name="colorScheme" required>
         <option value="" disabled>Select scheme</option>
@@ -38,9 +40,9 @@
       </span>
     </div>
 
-    <button type="submit" class="btn btn_primary">
-      {{ isEditingIndex !== null ? "Update Chart" : "Create Chart" }}
-    </button>
+    <div class="form-group" style="align-self: flex-end; flex: 0 0 auto">
+      <button type="submit" class="btn btn_primary">Create Chart</button>
+    </div>
   </form>
 
   <hr />
@@ -50,7 +52,7 @@
       <div class="chart-header">
         <h3>{{ chart.name }} ({{ chart.type }})</h3>
         <div class="actions">
-          <button (click)="editChart(i)">Edit</button>
+          <button (click)="openEditModal(i)">Edit</button>
           <button (click)="deleteChart(i)">Delete</button>
           <button (click)="resizeChart(i, true)">+</button>
           <button (click)="resizeChart(i, false)">-</button>
@@ -70,6 +72,70 @@
           [options]="chartOptions"
         ></canvas>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal for editing chart -->
+  <div class="modal-backdrop" *ngIf="isModalOpen">
+    <div class="modal">
+      <h2 class="edit_chart">Edit Chart</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Chart Name:</label>
+          <input
+            type="text"
+            [(ngModel)]="chartName"
+            name="chartName"
+            required
+          />
+          <span *ngIf="submitted && !chartName" class="error-text">
+            Chart name is required.
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label>Chart Type:</label>
+          <select [(ngModel)]="chartType" name="chartType" required>
+            <option value="" disabled>Select type</option>
+            <option *ngFor="let type of chartTypes" [value]="type.value">
+              {{ type.label }}
+            </option>
+          </select>
+          <span *ngIf="submitted && !chartType" class="error-text">
+            Chart type is required.
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label>Color Scheme:</label>
+          <select [(ngModel)]="selectedScheme" name="colorScheme" required>
+            <option value="" disabled>Select scheme</option>
+            <option
+              *ngFor="let scheme of colorSchemes"
+              [ngValue]="scheme.colors"
+            >
+              {{ scheme.name }}
+            </option>
+          </select>
+          <span
+            *ngIf="submitted && selectedScheme.length === 0"
+            class="error-text"
+          >
+            Color scheme is required.
+          </span>
+        </div>
+
+        <div style="margin-top: 1rem; text-align: right">
+          <button type="submit" class="btn btn_primary">Update Chart</button>
+          <button
+            type="button"
+            class="btn btn_secondary"
+            (click)="closeModal()"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
