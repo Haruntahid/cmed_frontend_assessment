@@ -57,4 +57,4 @@ ng serve
 ### 🌐 Live Site
 
 View the deployed application:
-🔗 https://your-live-site-url.com
+https://cmed-assessment.vercel.app/login
